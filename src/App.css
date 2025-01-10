@@ -14,3 +14,12 @@
   top: -30px;
   left: -135px;
 }
+
+.rotate {
+  animation: spinner 1.5s linear infinite;
+}
+@keyframes spinner {
+  to {
+    transform: rotate(360deg);
+  }
+}

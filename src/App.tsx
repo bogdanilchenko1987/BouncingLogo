@@ -1,9 +1,12 @@
 import logo from "./assets/sticker.png";
 import "./App.css";
 import { useDimensions } from "./hooks/useDimensions";
+import { useState } from "react";
 
 function App() {
-  const { top, left, rotate } = useDimensions();
+  const { top, left } = useDimensions();
+  const [clicked, setClicked] = useState(false);
+
   return (
     <>
       <div>
@@ -13,10 +16,11 @@ function App() {
             height: "200px",
             top,
             left,
-            transform: `rotate(${rotate}turn)`,
+            // transform: `rotate(${rotate}turn)`,
           }}
-          className="container"
           alt="logo"
+          className={`container ${clicked && "rotate"}`}
+          onClick={() => setClicked(!clicked)}
         />
       </div>
     </>
