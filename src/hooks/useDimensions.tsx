@@ -28,6 +28,9 @@ export const useDimensions = () => {
   // To change color
   const [color, setColor] = useState("#60D833");
 
+  // To rotate
+  const [rotate, setRotate] = useState(0);
+
   // To change direction
   const [flagHorizontal, setFlagHorizontal] = useState(true);
   const [flagVertical, setFlagVertical] = useState(true);
@@ -55,6 +58,7 @@ export const useDimensions = () => {
       if (top >= collision.vertical) {
         setFlagVertical(false);
         setColor(colors[numColor]);
+        setRotate((p) => p + 0.5);
       }
     } else {
       setTop(top - 1);
@@ -62,6 +66,7 @@ export const useDimensions = () => {
       if (top === 0) {
         setFlagVertical(true);
         setColor(colors[numColor]);
+        setRotate((p) => p - 0.5);
       }
     }
   };
@@ -73,6 +78,7 @@ export const useDimensions = () => {
       if (left >= collision.horizontal) {
         setFlagHorizontal(false);
         setColor(colors[numColor]);
+        setRotate((p) => p - 0.5);
       }
     } else {
       setLeft(left - 2);
@@ -80,6 +86,7 @@ export const useDimensions = () => {
       if (left === 0) {
         setFlagHorizontal(true);
         setColor(colors[numColor]);
+        setRotate((p) => p + 0.5);
       }
     }
   };
@@ -106,5 +113,5 @@ export const useDimensions = () => {
     }, 10);
   });
 
-  return { color, top, left };
+  return { color, top, left, rotate };
 };
