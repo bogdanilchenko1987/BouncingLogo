@@ -5,28 +5,10 @@ interface Collision {
   vertical: number;
 }
 
-const colors = [
-  "#60D833",
-  "#D500F9",
-  "#651FFF",
-  "#EF5350",
-  "#FF8F00",
-  "#F4FF81",
-  "#BCAAA4",
-  "#B0BEC5",
-  "#9DE7D7",
-  "#00B08B",
-  "#FF585D",
-  "#8DB9CA",
-];
-
 export const useDimensions = () => {
   // To move SVG
   const [top, setTop] = useState(0);
   const [left, setLeft] = useState(0);
-
-  // To change color
-  const [color, setColor] = useState("#60D833");
 
   // To rotate
   const [rotate, setRotate] = useState(0);
@@ -51,13 +33,12 @@ export const useDimensions = () => {
     });
   };
 
-  const moveVertical = (numColor: number) => {
+  const moveVertical = () => {
     if (flagVertical) {
       setTop(top + 1);
 
       if (top >= collision.vertical) {
         setFlagVertical(false);
-        setColor(colors[numColor]);
         setRotate((p) => p + 0.5);
       }
     } else {
@@ -65,19 +46,17 @@ export const useDimensions = () => {
 
       if (top === 0) {
         setFlagVertical(true);
-        setColor(colors[numColor]);
         setRotate((p) => p - 0.5);
       }
     }
   };
 
-  const moveHorizontal = (numColor: number) => {
+  const moveHorizontal = () => {
     if (flagHorizontal) {
       setLeft(left + 2);
 
       if (left >= collision.horizontal) {
         setFlagHorizontal(false);
-        setColor(colors[numColor]);
         setRotate((p) => p - 0.5);
       }
     } else {
@@ -85,7 +64,6 @@ export const useDimensions = () => {
 
       if (left === 0) {
         setFlagHorizontal(true);
-        setColor(colors[numColor]);
         setRotate((p) => p + 0.5);
       }
     }
@@ -105,13 +83,10 @@ export const useDimensions = () => {
   // This useEffect is to move DVD logo
   useEffect(() => {
     setTimeout(() => {
-      // Generate a random number to change the color
-      const random = Math.round(Math.random() * (colors.length - 1));
-
-      moveVertical(random);
-      moveHorizontal(random);
+      moveVertical();
+      moveHorizontal();
     }, 10);
   });
 
-  return { color, top, left, rotate };
+  return { top, left, rotate };
 };
